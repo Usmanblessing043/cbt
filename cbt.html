@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ID</title>
+</head>
+<style>
+    *{
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+    
+    #divtwo{
+        height: 500px;
+        width: 700px;
+        background-color: white;
+        display: flex;
+        flex-direction: column;
+        /* justify-content: center; */
+        align-items: center;
+        justify-content: space-between;
+    }
+    .logo img{
+        height: 70px;
+        width: 70px;
+        
+    }
+    #sqi{
+        font-size: 20px;
+        width: 80%;
+        text-align: center;
+    }
+    .student{
+        background-color: blue;
+        color: white;
+        width: 200px;
+        text-align: center;
+    }
+    .studentid{
+        display: flex;
+        text-align: center;
+        justify-content: center;
+        align-items: center;
+    }
+    .studentid h1{
+        font-size: 15px;
+    }
+    .edu{
+        background-color: blue;
+        color: white;
+        width: 100%;
+        text-align: center;
+    }
+    #image{
+        height: 50px;
+        width: 50px;
+        border-radius: 50%;
+    }
+    .div0ne{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 10px;
+    }
+    #previous-button, #next-button{
+        height: 30px;
+        width: 100px;
+        font-size: 20px;
+        font-weight: 700;
+        background-color: peru;
+        border: none;
+        outline: 2px whitesmoke solid;
+    }
+    .divfive{
+        background-color: brown;
+        
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+    }
+    .seventhdiv{
+        display: flex;
+        gap: 15px;
+    }
+    .seventhdiv button{
+        height: 30px;
+        width: 50px;
+        font-weight: 500;
+    
+    }
+
+</style>
+<body>
+    <div class="divfive">
+        <div class="div0ne">
+            <button id="previous-button" onclick="previous()">Previous</button>
+            <div id="divtwo">
+            </div>
+            <button id="next-button" onclick="next()">Next</button>
+        </div>
+       
+        
+
+    </div>
+</body>
+</html>
+<script>
+    //  let image = document.getElementById('image')
+    //     let name = document.getElementById('name')
+    //     let student = document.getElementById('student')
+   
+    let big = document.getElementById('divtwo')
+    let index = 0;
+    let scor = []
+    
+    
+    let idCardDetail = [
+        {  question:'My name is ? ', options:['Blessing', 'Dayo', 'Tosin', 'Temi'], answer: 0},
+        {  question: 'Chlorophyta is an example of ', options:['Fungi','Bacteria', 'Algea', 'Virus'], answer: 2}, 
+        {  question: '.........is an unwanted plant found in an unwanted place', options:['Animal', 'Bacteria', 'Nicotine', 'Weed'], answer: 3},
+        {  question: 'Potato Dextrose Agar means ', options:['SDA', 'PDA', 'PDAA', 'CDA'], answer: 1},
+        {  question: '..........is a person who receive and direct visitor in an organisation', options:['Student', 'Receptionist', 'Pa', 'CDA'], answer: 1},
+    ];
+    
+
+        
+
+
+    
+    
+    
+
+    function produceIdCard() {
+
+        big.innerHTML = `<div class="logo"><img src="sqi.jpg" alt=""></div>
+                <h1 id="sqi">SQI COLLEGE OF ICT IBADAN</h1>
+                <div class="student">
+                    <p>General Question</p>
+                </div>
+    
+                <h4 id="subject">${idCardDetail[index].question}</h4>
+                <h4 id="name">${idCardDetail[index].options.map((optionn, i)=>
+                    `<input type="radio" name="answer" id="optionn-${i}" value="${i}" >
+                    <label for="optionn-${i}">${optionn}</label><br>
+                    `
+       
+            
+                ).join('')}</h4>
+                <button onclick="submitt()">SUBMIT</button>
+                    <div class="seventhdiv">
+                <button onclick="numm(0)">1</button>
+                <button onclick="numm(1)">2</button>
+                <button onclick="numm(2)">3</button>
+                <button onclick="numm(3)">4</button>
+                <button onclick="numm(4)">5</button>
+                </div>
+                
+                
+                
+                <div class="edu">
+                    <p>edu.sqi.ng</p>
+                </div> 
+                  
+                `;
+                        
+       
+       
+
+        // image.src = idCardDetail[index].image
+        // name.textContent = idCardDetail[index].name
+        // student.textContent = idCardDetail[index].student
+        
+    }
+
+    produceIdCard()
+    
+
+    next = ()=>{
+        index =  ++index
+        produceIdCard()
+    }
+    previous = ()=>{
+        index = index === 0 ? idCardDetail.length - 1 : --index
+        produceIdCard()
+    }
+    function submitt() {
+        let quest = idCardDetail[index]
+        let useranser = parseInt(document.querySelector('input[name="answer"]:checked').value)
+        
+        if (useranser === quest.answer) {
+            
+            scor[index] = 2
+            alert(` correct you score ${scor[index]} `)
+            
+            
+        }else{
+            scor[index] = 0
+            alert(` wrong you score ${scor[index]} `)
+        }
+
+        
+       
+    }
+    function numm(inde) {
+        index =  inde
+        produceIdCard() 
+    }
+
+</script>
